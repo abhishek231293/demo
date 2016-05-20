@@ -27,7 +27,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        dd('create task');
+        return view('add');
     }
 
     /**
@@ -38,7 +38,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new \App\Task();
+
+        $task->name = $request->name;
+        $task->role = $request->role;
+        $task->contact = $request->contact;
+        $task->save();
+        return redirect('task');
+
     }
 
     /**
@@ -86,6 +93,6 @@ class TaskController extends Controller
         DB::table('tasks')
             ->where('id',$id)
             ->update(['is_active' => 0]);
-
+        return back();
     }
 }
