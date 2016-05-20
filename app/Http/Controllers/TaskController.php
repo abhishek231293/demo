@@ -13,10 +13,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
 
-        $task = DB::table('tasks')->where('is_active', 1)->orderBy('name', 'ASC')->get();
+        $task = DB::table('tasks')->orderBy('created_at', 'DESC')->get();
         return view('tasks', ['tasks' => $task]);
     }
 
@@ -56,7 +57,12 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-
+         $task = \App\Task::find($id);
+         
+         $task->is_active = 1;
+         $task->save();
+         return back();
+         
     }
 
     /**
@@ -67,7 +73,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-
+        
     }
 
     /**
@@ -79,7 +85,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        
     }
 
     /**
