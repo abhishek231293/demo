@@ -44,6 +44,7 @@ class TaskController extends Controller
         $task->role = $request->role;
         $task->contact = $request->contact;
         $task->save();
+        
         return redirect('task');
 
     }
