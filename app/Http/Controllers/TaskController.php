@@ -8,6 +8,11 @@ use App\Http\Requests;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +23,7 @@ class TaskController extends Controller
     {
 
         $task = DB::table('tasks')->orderBy('created_at', 'DESC')->get();
+        
         return view('tasks', ['tasks' => $task]);
     }
 
@@ -73,7 +79,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        
+            
     }
 
     /**
@@ -85,7 +91,16 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(isset($request->active)){
+            $value = 0;
+        }else{
+            $value = 1;
+        }
         
+        DB::table('tasks')
+            ->where('id',$id)
+            ->update(['is_active' => $value]);
+        return back();  
     }
 
     /**
@@ -96,9 +111,8 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('tasks')
-            ->where('id',$id)
-            ->update(['is_active' => 0]);
+        $task = \App\Task::find($id);
+        $task->delete();
         return back();
     }
 }

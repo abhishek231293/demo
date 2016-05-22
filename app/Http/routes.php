@@ -12,12 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('task', function () {
     return view('tasks');
 });
+
+Route::get('profile', function () {
+    return view('profile');
+});
+
 
 Route::auth();
 

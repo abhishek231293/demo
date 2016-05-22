@@ -13,15 +13,18 @@
                     <div class="box-content">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid"><div class="row">
                                 <div class="col-lg-6">
-                                    <div class="dataTables_filter" id="DataTables_Table_0_filter">
-                                        <label>Search: 
-                                            
-                                            <input type="text" aria-controls="DataTables_Table_0">
-                                            
-                                        </label>
+                                    <div class="col-md-4">
+                                        <form class="search-form" action="task/" method="GET">
+                                           
+                                            {{ csrf_field() }}
+                                            <div class="form-group has-feedback">
+                                                <label for="search" class="sr-only">Search</label>
+                                                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-
                             <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                 <tr role="row">
@@ -58,7 +61,29 @@
                                     <td class=" ">{{$task->contact}}</td>
                                     <td class=" ">{{$task->created_at}}</td>
                                     <td class=" ">{{$task->updated_at}}</td>
-                                    <td class=" ">{{ $task->is_active != 0 ? 'Active' : 'Deactive' }}</td>
+                                    <td class=" ">
+                                        @if ($task->is_active == 0)
+                                        <div style="display:inline-block;">
+                                            <form name="deactive" action="task/{{$task->id}}" method="POST">
+                                                {{ method_field('PUT') }}
+                                                {{ csrf_field() }}
+                                                    <button  name='deactive' class="btn btn-danger" type="submit">
+                                                        <i class="fa "><b> Deactive </b></i>
+                                                    </button>
+                                            </form>
+                                        </div >
+                                        @else
+                                        <div style="display:inline-block;">
+                                            <form action="task/{{$task->id}}" method="POST">
+                                                {{ method_field('PUT') }}
+                                                {{ csrf_field() }}
+                                                    <button name='active' class="btn btn-success" type="submit">
+                                                        <i class="fa">Active</i>
+                                                    </button>
+                                            </form>
+                                        </div>
+                                       @endif    
+                                    </td>
                                     <td class=" ">
                                         <div style="display:inline-block;">
                                             <a class="btn btn-success" href="">
@@ -70,27 +95,17 @@
                                                 <i class="fa fa-edit "></i>
                                             </a>
                                         </div>
-                                        @if ($task->is_active != 0)
+                                        
                                         <div style="display:inline-block;">
                                             <form  action="task/{{$task->id}}" method="POST">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                     <button class="btn btn-danger" type="submit">
-                                                        <i class="fa fa-trash-o "></i>
+                                                        <i class="fa fa-trash-o">    </i>
                                                     </button>
                                             </form>
                                         </div >
-                                        @else
-                                        <div style="display:inline-block;">
-                                            <form  action="task/{{$task->id}}" method="GET">
-
-                                                {{ csrf_field() }}
-                                                    <button class="btn btn-danger" type="submit">
-                                                        <i class="fa">+</i>
-                                                    </button>
-                                            </form>
-                                        </div>
-                                       @endif
+                                        
                                     </td>
                                 </tr>
                                 @endforeach
