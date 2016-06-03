@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('task', function () {
+Route::get('task',['as'=>'mytask'], function () {
     return view('tasks');
 });
 
