@@ -13,11 +13,18 @@
                     <div class="box-content">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid"><div class="row">
                                 <div class="col-lg-6">
-                                    <div class="dataTables_filter" id="DataTables_Table_0_filter">
-                                        <label>Search: <input type="text" aria-controls="DataTables_Table_0"></label>
+                                    <div class="col-md-4">
+                                        <form class="search-form" action="task/" method="GET">
+                                           
+                                            {{ csrf_field() }}
+                                            <div class="form-group has-feedback">
+                                                <label for="search" class="sr-only">Search</label>
+                                                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-
                             <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                 <tr role="row">
@@ -37,6 +44,9 @@
                                         Updation Date
                                     </th>
                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 287px;">
+                                       Status
+                                    </th>
+                                    <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 287px;">
                                         Action
                                     </th>
                                 </tr>
@@ -52,43 +62,55 @@
                                     <td class=" ">{{$task->created_at}}</td>
                                     <td class=" ">{{$task->updated_at}}</td>
                                     <td class=" ">
-                                        <a class="btn btn-success" href="">
-                                            <i class="fa fa-search-plus "></i>
-                                        </a>
-                                        <a class="btn btn-info" href="">
-                                            <i class="fa fa-edit "></i>
-                                        </a>
-                                        <form  action="task/{{$task->id}}" method="POST">
-                                            {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
-                                                <button class="btn btn-danger" type="submit">
-                                                    <i class="fa fa-trash-o "></i>
-                                                </button>
-                                        </form>
+                                        @if ($task->is_active == 0)
+                                        <div style="display:inline-block;">
+                                            <form name="deactive" action="task/{{$task->id}}" method="POST">
+                                                {{ method_field('PUT') }}
+                                                {{ csrf_field() }}
+                                                    <button  name='deactive' class="btn btn-danger" type="submit">
+                                                        <i class="fa "><b> Deactive </b></i>
+                                                    </button>
+                                            </form>
+                                        </div >
+                                        @else
+                                        <div style="display:inline-block;">
+                                            <form action="task/{{$task->id}}" method="POST">
+                                                {{ method_field('PUT') }}
+                                                {{ csrf_field() }}
+                                                    <button name='active' class="btn btn-success" type="submit">
+                                                        <i class="fa">Active</i>
+                                                    </button>
+                                            </form>
+                                        </div>
+                                       @endif    
+                                    </td>
+                                    <td class=" ">
+                                        <div style="display:inline-block;">
+                                            <a class="btn btn-success" href="">
+                                                <i class="fa fa-search-plus "></i>
+                                            </a>
+                                        </div>
+                                        <div style="display:inline-block;">
+                                            <a class="btn btn-info" href="">
+                                                <i class="fa fa-edit "></i>
+                                            </a>
+                                        </div>
+                                        
+                                        <div style="display:inline-block;">
+                                            <form  action="task/{{$task->id}}" method="POST">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                    <button class="btn btn-danger" type="submit">
+                                                        <i class="fa fa-trash-o">    </i>
+                                                    </button>
+                                            </form>
+                                        </div >
+                                        
                                     </td>
                                 </tr>
                                 @endforeach
-                                {{--<tr class="even">--}}
-                                    {{--<td class=" sorting_1">Adinah Ralph</td>--}}
-                                    {{--<td class=" ">2012/06/01</td>--}}
-                                    {{--<td class=" ">Admin</td>--}}
-                                    {{--<td class=" ">--}}
-                                        {{--<span class="label label-default">Inactive</span>--}}
-                                    {{--</td>--}}
-                                    {{--<td class=" ">--}}
-                                        {{--<a class="btn btn-success" href="table.html#">--}}
-                                            {{--<i class="fa fa-search-plus "></i>--}}
-                                        {{--</a>--}}
-                                        {{--<a class="btn btn-info" href="table.html#">--}}
-                                            {{--<i class="fa fa-edit "></i>--}}
-                                        {{--</a>--}}
-                                        {{--<a class="btn btn-danger" href="table.html#">--}}
-                                            {{--<i class="fa fa-trash-o "></i>--}}
-                                        {{--</a>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
                                 </tbody>
-                            </table>
+                            </table>    
 
                         </div>
                     </div>

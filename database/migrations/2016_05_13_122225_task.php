@@ -17,6 +17,7 @@ class Task extends Migration
             $table->string('name');
             $table->string('role');
             $table->string('contact');
+            $table->integer('is_active')->default('1');
             $table->timestamps();
         });
     }
