@@ -20,11 +20,10 @@ class TaskController extends Controller
      */
     
     public function index()
-    {
-
+    {   
         $task = DB::table('tasks')->orderBy('created_at', 'DESC')->get();
-        
-        return view('tasks', ['tasks' => $task]);
+        $role = DB::table('tasks')->groupBy('role')->get();
+        return view('tasks', ['tasks' => $task, 'roles' => $role]);
     }
 
     /**
@@ -97,10 +96,10 @@ class TaskController extends Controller
         }else{
             $value = 1;
         }
-        
+        $date = date('Y-m-d H:i:s');
         DB::table('tasks')
             ->where('id',$id)
-            ->update(['is_active' => $value]);
+            ->update(['is_active' => $value,'updated_at' => $date]);
         return back();  
     }
 
