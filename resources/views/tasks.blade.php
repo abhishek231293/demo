@@ -17,24 +17,30 @@
                                        
                                             {{ csrf_field() }}
                                             <div class="form control-group">
-                                                 <form class="search-form" action="{{ url('/task') }}" method="GET">
+                                                <form id="taskList" class="search-form" action="{{ url('/task') }}" method="GET">
                                                     <select class="form-control" id="status" name="status" >
                                                         <option value=""> --Select Status-- </option>
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Deactive</option>
+                                                        <option <?php echo (isset($_REQUEST['status']) && $_REQUEST['status'] == '1' ) ? 'Selected' : '' ?> value="1">Active</option>
+                                                        <option <?php echo (isset($_REQUEST['status']) && $_REQUEST['status'] == '0'   ) ? 'Selected' : '' ?> value="0">Deactive</option>
                                                     </select>
                                                      
                                                     <select class="form-control" id="status" name="role">
                                                         <option value=""> --Select Department-- </option>
                                                         @foreach ($roles as $role)
-                                                            <option value="{{$role->role}}">{{$role->role}}</option>
+                                                            <option <?php echo (isset($_REQUEST['role']) && $_REQUEST['role'] == $role->role ) ? 'Selected' : '' ?> value="{{$role->role}}">{{$role->role}}</option>
                                                         @endforeach
                                                     </select>
                                                      
-                                                     <input placeholder="Enter Name" class="form-control" id="member_name" name="member_name">
+                                                    <input value="<?php echo (isset($_REQUEST['member_name']) ? $_REQUEST['member_name'] : '' ) ?>" placeholder="Enter Name" class="form-control" id="member_name" name="member_name">
                                                      
-                                                     <button class="form-control btn-danger" type="submit">
-                                                         Go
+                                                    <button class="form-control btn-success" type="submit">
+                                                        <span class="glyphicon glyphicon-search"></span> 
+                                                            Go
+                                                    </button>
+                                                   
+                                                     <button onclick="resetField('#taskList')" class="form-control btn-danger" type="reset">
+                                                         <span class="glyphicon glyphicon-refresh"></span> 
+                                                         <a  style="text-decoration: none; color: white; ">Reset </a>
                                                      </button>
                                                 </form>
                                             </div>
@@ -74,9 +80,9 @@
                                         
                                             @foreach ($tasks as $task)
 
-                                        <tr class="odd">
-                                            <td class=" sorting_1">{{$task->name}}</td>
-                                            <td class=" ">{{$task->role}}</td>
+                                            <tr class="odd" id="{{$task->id}}">
+                                            <td class="sorting_1">{{ucwords(trans($task->name))}}</td>
+                                            <td class="">{{ucwords(trans($task->role))}}</td>
                                             <td class=" ">{{$task->contact}}</td>
                                             <td class=" ">{{date('d-m-y H:i:s',strtotime($task->created_at) )}}</td>
                                             <td class=" ">{{date('d-m-y H:i:s',strtotime($task->updated_at))}}</td>
@@ -104,30 +110,102 @@
                                                @endif    
                                             </td>
                                             <td class="">
-                                               
-                                                <div style="display:inline-block;">
-                                                    <a class="btn btn-info" href="">
-                                                        <i class="fa fa-edit "></i>
-                                                    </a>
+                                                
+                                                <div style="display:inline-block;"
+                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal_{{$task->id}}">
+                                                            <i class="fa fa-edit "></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
 
                                                 <div style="display:inline-block;">
                                                     <form  action="task/{{$task->id}}" method="POST">
                                                         {{ method_field('DELETE') }}
                                                         {{ csrf_field() }}
-                                                            <button class="btn btn-danger" type="submit">
-                                                                <i class="fa fa-trash-o">    </i>
+                                                        
+                                                        <a style="text-decoration: none;" onclick="return confirm('Are you sure you want to delete this user?')">
+                                                            
+                                                            <button class="edit btn btn-danger" type="submit">
+                                                                
+                                                                    <i class="fa fa-trash-o"></i>
+                                                                
                                                             </button>
+                                                        </a>
                                                     </form>
-                                                </div >
+                                                </div>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="myModal_{{$task->id}}" tabindex="-1" role="dialog" 
+                                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                                   <div class="modal-dialog">
+                                                       <div class="modal-content">
+                                                           <!-- Modal Header -->
+                                                           <div class="modal-header">
+                                                               <button type="button" class="close" 
+                                                                  data-dismiss="modal">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                      <span class="sr-only">Close</span>
+                                                               </button>
+                                                               <h4 class="modal-title" id="myModalLabel">
+                                                                   Edit Detail
+                                                               </h4>
+                                                           </div>
 
+                                                           <!-- Modal Body -->
+                                                           <div class="modal-body">
+
+                                                                <form role="form" method="GET" action="task/{{$task->id}}/edit">
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-2">
+                                                                           <label for="name">Name</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" style="width: 100%;"  name="name" class="form-control"
+                                                                                id="name" value="{{$task->name}}" placeholder="Enter Name."/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 row2">
+                                                                        <div class="col-md-2">
+                                                                           <label for="role">Role</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input style="width: 100%;" type="text" name="role" class="form-control"
+                                                                         id="role" value="{{$task->role}}" placeholder="Enter Role."/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 row2">
+                                                                        <div class="col-md-2">
+                                                                           <label for="contact">Contact</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                         <input style="width: 100%;" type="text" name="number" value="{{$task->contact}}" class="form-control"
+                                                                         id="number" placeholder="Enter Contact Number."/>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <button style="position: relative; left: 300px;  " type="submit" class="row2 btn btn-primary">
+                                                                    Update
+                                                                </button>
+                                                                        
+                                                                <button style="position: relative; left: 310px;  " type="button" class="row2 btn btn-default" data-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                            </form>  
+                                                               
+
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                                
                                             </td>
                                         </tr>
                                         @endforeach
                                         </tbody>
                                     </table>    
+                                                         
                                 </div>            
-                            </div>
+                            </div>  
                     </div>
                 </div>
             </div>
@@ -136,5 +214,4 @@
     </div><!--/row-->
 
 </div>
-
 @endsection

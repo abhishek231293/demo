@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -19,9 +19,27 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index()
+    public function index(Request $request)
     {   
-        $task = DB::table('tasks')->orderBy('created_at', 'DESC')->get();
+//        $task = DB::table('tasks')->orderBy('created_at', 'DESC')->simplePaginate(2);
+        
+        $task = \App\Task::query();
+        
+        if($request->has('status') || ($request->has('role') || $request->has('member_name')) ){
+         if($request->has('status')){
+            $task->where('is_active', $request->status);  
+         }
+         if( $request->has('member_name')){
+             $task->where('name', 'like', '%'. $request->member_name.'%'); 
+         }
+           
+         if( $request->has('role')){
+             $task->where('role', $request->role); 
+         }           
+            
+        }
+      
+        $task = $task->get();  
         $role = DB::table('tasks')->groupBy('role')->get();
         return view('tasks', ['tasks' => $task, 'roles' => $role]);
     }
@@ -77,9 +95,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-            
+    public function edit($id,Request $request)
+    {  
+       $task = \App\Task::find($id);
+       $task->name = $request->name;
+       $task->role = $request->role;
+       $task->contact = $request->number;
+       $task->updated_at = date('Y-m-d H:i:s');
+       
+       $task->save();
+         return back();
     }
 
     /**
