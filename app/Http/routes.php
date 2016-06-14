@@ -11,21 +11,16 @@
 |
 */
 
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', function () {
     return view('home');
 });
-
 Route::get('task',['as'=>'mytask'], function () {
     return view('tasks');
 });
 
-Route::get('profile', function () {
-    return view('profile');
-});
-
-
 Route::auth();
-
 Route::get('/', 'HomeController@index');
-
 Route::resource('task', 'TaskController');
+Route::resource('profile/{id}', 'ProfileController@index');

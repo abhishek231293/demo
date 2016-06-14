@@ -5,38 +5,32 @@
         <div class="col-md-12">
             <div class="row panel panel-profile">
                 <div class="panel-heading col-md-3 col-lg-2">
-                    <img src="../public/images/profile_image/abhishekgupta_2.jpg" height="150px" width="150px" alt="" class="img-circle"><br>
-                    <h4 class="profile-title">Abhishek Gupta</h4>
-                    <p class="profile-info">Software Engineer</p>
+                    <img src="../public/images/profile_image/{{$userDetail[0]['profile_image']}}" height="150px" width="150px" alt="" class="img-circle"><br>
+                    <h4 class="profile-title">{{$userDetail[0]['name']}}</h4>
+                    <p class="profile-info">{{$userDetail[0]['designation']}}</p>
                 </div>
                 <div class="panel-body col-md-9 col-lg-10">
                     <h4 class="first">About Me</h4>
-                    <p>
-                        Donec iaculis a nibh in egestas. Praesent interdum ipsum id tellus ullamcorper tristique. Nam auctor diam massa. Ut diam dui, pretium ac purus vitae, egestas sollicitudin velit. Quisque faucibus metus mattis nunc placerat, in malesuada erat pellentesque. Phasellus molestie elit id egestas aliquam. Donec tincidunt nunc ac congue mattis. Donec non odio nec justo varius ullamcorper.
-                    </p>
-                    <p>
-                        Vivamus leo dolor, mattis sit amet nisi sed, dictum semper urna. Vivamus ultricies velit ut lacus aliquam, sed scelerisque orci placerat. Duis eget ultrices nulla. Maecenas diam est, aliquet non dictum et, tempor et sem. Fusce tristique varius nisl at venenatis. Suspendisse id sapien non nisl eleifend lacinia quis nec mauris. Fusce eget mauris eu tellus cursus imperdiet quis et metus. Proin non commodo velit. In eget justo vestibulum, scelerisque justo sit amet, iaculis tortor. Suspendisse ut orci mi. Suspendisse suscipit pharetra orci nec dapibus. Integer laoreet libero ut sem ullamcorper tincidunt. Vestibulum quis tincidunt odio. Phasellus tortor nulla, fringilla non turpis pharetra, mollis scelerisque justo. Donec fermentum mauris mauris, ut adipiscing urna ornare eget.
-                    </p>
-                    <p>
-                        Curabitur varius pulvinar massa, eget ultricies urna ultricies sed. Vestibulum consequat dictum dui quis gravida. Sed porta sem nec orci aliquam, ac fermentum eros malesuada. Etiam tristique sagittis odio vitae semper. Nulla auctor magna nisl, eget fringilla nunc scelerisque et. Vivamus dictum dui diam, vitae pretium dolor facilisis ornare. Maecenas cursus nisl pretium auctor elementum.
+                    <p style="text-align: justify;">
+                        {{$userDetail[0]['about']}}
                     </p>
                     <div class="row">
                         <div class="col-md-6">
                             <h4>Contact Information</h4>
                             <dl class="dl-horizontal">
                                 <dt>Email Address: </dt>
-                                <dd>mark.smith@example.com</dd>
+                                <dd>{{$userDetail[0]['email']}}</dd>
                                 <dt>Phone Number: </dt>
-                                <dd>+01 (345) 825 552</dd>
+                                <dd>+91-{{$userDetail[0]['phone_number']}}</dd>
                                 <dt>Skype ID: </dt>
-                                <dd>mark.smith</dd>
+                                <dd>{{$userDetail[0]['skype_id']}}</dd>
                                 <dt>Address: </dt>
-                                <dd>21st Street, Pennsylvania Avenue, NY, USA </dd>
+                                <dd>{{$userDetail[0]['address']}}</dd>
                                 <dt>External Links: </dt>
                                 <dd>
-                                    <a href="http://www.facebook.com/Mark.Smith1122">Facebook</a> /
-                                    <a href="http://www.example.com">Website</a> /
-                                    <a href="http://blog.example.com">Blog</a>
+                                    <a href="{{$userDetail[0]['facebook_link']}}">Facebook</a> /
+                                    <a href="{{$userDetail[0]['github_link']}}">Git Hub</a> /
+                                    <a href="{{$userDetail[0]['blog_link']}}">Blog</a>
                                 </dd>
                             </dl>
                         </div>
@@ -44,16 +38,16 @@
                             <h4>Account Information</h4>
                             <dl class="dl-horizontal">
                                 <dt>Username: </dt>
-                                <dd>mark.smith</dd>
+                                <dd>{{$userDetail[0]['user_name']}}</dd>
                                 <dt>Member Since: </dt>
-                                <dd>25 Dec. 2013</dd>
+                                <dd>{{date('d F Y',strtotime($userDetail[0]['created_at']))}}</dd>
                                 <dt>Employee ID: </dt>
-                                <dd>84921</dd>
-                                <dt>Department: </dt>
-                                <dd>Marketing</dd>
-                                <dt>Supervisor: </dt>
+                                <dd>{{$userDetail[0]['employee_id']}}</dd>
+                                <dt>HOD: </dt>
+                                <dd>{{$userDetail[0]['hod']}}</dd>
+                                <dt>Team Lead: </dt>
                                 <dd>
-                                    <a href="#">Andrew Jenkins</a>
+                                    {{$userDetail[0]['team_lead']}}
                                 </dd>
                             </dl>
                         </div>

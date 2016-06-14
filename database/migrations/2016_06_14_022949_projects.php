@@ -16,7 +16,6 @@ class Project extends Migration
             $table->increments('id');
             $table->string('project_name');
             $table->integer('is_active')->default('1');
-            
         });
     }
 
