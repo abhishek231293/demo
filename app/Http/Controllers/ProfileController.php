@@ -19,4 +19,8 @@ class ProfileController extends Controller
         
         return view('profile', ['userDetail' => $userRowsets]);
     }
+    
+    public function changePassword($id){
+        dd($id);
+    }
 }

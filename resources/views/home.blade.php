@@ -27,12 +27,12 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-3">
-                            <i class="fa fa-envelope fa-5x">
+                            <i class="fa fa-wechat fa-5x">
                             </i>
                         </div>
                         <div class="col-sm-9 text-right">
-                            <div class="huge">06</div>
-                            <div>New Messages!</div>
+                            <div class="huge">{{$activeUser + $deactiveUser}}</div>
+                            <div>Total Member!</div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                             </i>
                         </div>
                         <div class="col-sm-9 text-right">
-                            <div class="huge">6</div>
+                            <div class="huge">{{$activeUser}}</div>
                             <div>Active Members!</div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             </i>
                         </div>
                         <div class="col-sm-9 text-right">
-                            <div class="huge">28</div>
+                            <div class="huge">{{$deactiveUser}}</div>
                             <div>Deactive Members!</div>
                         </div>
                     </div>

@@ -24,18 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $task = new \App\Task();
-//        $activeUser = count($task->where('is_active','=',1)->get()->toArray());
-//       
-//        $deactiveUser = count($task->where('is_active','=',0)->get()->toArray());
-//        
-//        $data = new \App\Task();
-//        $data->{active} = $activeUser;
-//        $data->{deactive} = $deactiveUser;
-//        dd($data);
-//        
-//        return view('home',['user'=>$data]);
-        return view('home');
+        $task = new \App\Task();
+        $activeUser = count($task->where('is_active','=',1)->get()->toArray());
+       
+        $deactiveUser = count($task->where('is_active','=',0)->get()->toArray());
+         
+        return view('home',['activeUser'=>$activeUser,'deactiveUser' => $deactiveUser]);
+      
     }
     
 }

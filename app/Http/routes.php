@@ -24,3 +24,4 @@ Route::auth();
 Route::get('/', 'HomeController@index');
 Route::resource('task', 'TaskController');
 Route::resource('profile/{id}', 'ProfileController@index');
+Route::resource('profile/{id}/password', 'ProfileController@changePassword');
