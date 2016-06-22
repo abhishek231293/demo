@@ -76,6 +76,32 @@
             </div>
         </div>
     </div>
+
+    <div class="row col-md-12 row4">
+
+        <div id="bar_chart_container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    </div>
 </div>
 
+@endsection
+
+@section('script')
+
+<script type="text/javascript">
+    var CSRF_TOKEN = "<?=csrf_token(); ?>";
+    $(document).ready()
+    {
+        $.ajax({
+            url: "create",
+            type: "post",
+            data: {_token: CSRF_TOKEN},
+            success: function(result){
+                createBarChart(result);
+            }
+        });
+    }
+
+
+</script>
 @endsection

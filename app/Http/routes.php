@@ -16,12 +16,11 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('task',['as'=>'mytask'], function () {
-    return view('tasks');
-});
 
-Route::auth();
 Route::get('/', 'HomeController@index');
+Route::post('create', 'HomeController@create');
+Route::auth();
 Route::resource('task', 'TaskController');
-Route::resource('profile/{id}', 'ProfileController@index');
-Route::resource('profile/{id}/password', 'ProfileController@changePassword');
+Route::get('profile/{id}', 'ProfileController@index');
+Route::get('profile/{id}/password', 'ProfileController@changePassword');
+Route::post('profile/{id}/reset', 'ProfileController@resetPassword');

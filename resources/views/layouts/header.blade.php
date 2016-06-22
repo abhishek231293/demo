@@ -68,8 +68,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>View profile</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url( '/profile/'.Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i>View profile</a></li>
+                                <li><a href="{{url( '/profile/'.Auth::user()->id.'/password')}}"><i class="fa fa-btn fa-lock"></i>Change Password</a></li>
+                                <li><a href="{{ url( '/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
@@ -85,14 +86,30 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="../public/javascript/form.js"></script>
-    
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+
+    <!-- Sweet Alert For IE support -->
+    <script src="bower_components/es6-promise/promise.min.js"></script>
+
+    <!--canvas box-->
+    <!-- HighCharts -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+    <script src="{{ asset('javascript/form.js') }}"></script>
+    <script src="{{ asset('javascript/graphs.js') }}"></script>
+
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

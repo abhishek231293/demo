@@ -21,6 +21,11 @@ class ProfileController extends Controller
     }
     
     public function changePassword($id){
-        dd($id);
+        return view('change-password',['id'=>$id]);
+    }
+    
+    public function resetPassword(Request $request, $id){
+        echo "ID : " .$id."<br>";
+        dd($request->request);
     }
 }

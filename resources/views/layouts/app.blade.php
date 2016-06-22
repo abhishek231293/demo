@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-   
-    
+
+    <!-- Sweet Alert Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.css">
+
     <!-- Styles -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -68,9 +70,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="profile/{{Auth::user()->id}}"><i class="fa fa-btn fa-user"></i>View profile</a></li>
-                                <li><a href="profile/{{Auth::user()->id}}/password"><i class="fa fa-btn fa-lock"></i>Change Password</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url( '/profile/'.Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i>View profile</a></li>
+                                <li><a href="{{url( '/profile/'.Auth::user()->id.'/password')}}"><i class="fa fa-btn fa-lock"></i>Change Password</a></li>
+                                <li><a href="{{ url( '/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
@@ -86,13 +88,24 @@
     </nav>
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="../public/javascript/form.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    <!--canvas box-->
+    <!-- HighCharts -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.js"></script>
+
+    <script src="{{ asset('javascript/form.js') }}"></script>
+    <script src="{{ asset('javascript/graphs.js') }}"></script>
     
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

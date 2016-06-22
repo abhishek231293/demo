@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TaskController extends Controller
 {
@@ -39,7 +40,9 @@ class TaskController extends Controller
             
         }
       
-        $task = $task->get();  
+        $task = $task->orderby('created_at','DESC')->paginate(5);
+//        $task->appends([request()->all()])->links();
+
         $role = DB::table('tasks')->groupBy('role')->get();
         return view('tasks', ['tasks' => $task, 'roles' => $role]);
     }

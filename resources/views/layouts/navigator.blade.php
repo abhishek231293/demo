@@ -4,7 +4,7 @@
 <ul class="nav nav-tabs">
     <li role="presentation" class="<?=($routeName==''? 'active': '')?>"><a  href="{{url('/')}}">Welcome</a></li>
   <li role="presentation" class="<?=($routeName=='task.index'? 'active': '')?>" ><a href="{{url('/task')}}">Members</a></li>
-  <li role="presentation" class="<?=($routeName=='task.create'? 'active': '')?>" ><a  href="{{url('/task/create')}}">Add Member</a></li>
+  <!--<li role="presentation" class="<?=($routeName=='task.create'? 'active': '')?>" ><a  href="{{url('/task/create')}}">Add Member</a></li>-->
   <li role="presentation" ><a  href="#">Messages</a></li>
 </ul>
 </div>
@@ -12,6 +12,7 @@
 
 @yield('content')
 
+@yield('script');
 <script type="text/javascript">
 
 $(document).ready(function() {

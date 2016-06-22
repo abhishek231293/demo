@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="row panel panel-profile">
                 <div class="panel-heading col-md-3 col-lg-2">
-                    <img src="../public/images/profile_image/{{$userDetail[0]['profile_image']}}" height="150px" width="150px" alt="" class="img-circle"><br>
+                    <img src="{{url('images/profile_image/'.$userDetail[0]['profile_image'])}}" height="150px" width="150px" alt="" class="img-circle"><br>
                     <h4 class="profile-title">{{$userDetail[0]['name']}}</h4>
                     <p class="profile-info">{{$userDetail[0]['designation']}}</p>
                 </div>
@@ -52,38 +52,6 @@
                             </dl>
                         </div>
                     </div>
-
-                    <h4>Current Projects</h4>
-                    <ul class="gallery">
-                        <li class="item">
-                            <img alt="150x150" src="img/gallery/1H.jpg">
-                            <div class="details">
-                                <a href="#" class="action"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="action"><i class="fa fa-pencil"></i></a>
-                            </div>
-                        </li>
-                        <li class="item">
-                            <img alt="150x150" src="img/gallery/7H.jpg">
-                            <div class="details">
-                                <a href="#" class="action"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="action"><i class="fa fa-pencil"></i></a>
-                            </div>
-                        </li>
-                        <li class="item">
-                            <img alt="150x150" src="img/gallery/17H.jpg">
-                            <div class="details">
-                                <a href="#" class="action"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="action"><i class="fa fa-pencil"></i></a>
-                            </div>
-                        </li>
-                        <li class="item">
-                            <img alt="150x150" src="img/gallery/18H.jpg">
-                            <div class="details">
-                                <a href="#" class="action"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="action"><i class="fa fa-pencil"></i></a>
-                            </div>
-                        </li>
-                    </ul>
 
                 </div>
             </div>
