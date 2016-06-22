@@ -66,5 +66,11 @@ class HomeController extends Controller
         die(json_encode($data, JSON_NUMERIC_CHECK));
 
     }
-    
+
+    public function galleryData(){
+        $image = new \App\gallery_image();
+        $data = $image->where('is_active','=',1)->get();
+
+        return view('gallery',['images'=>$data]);
+    }
 }

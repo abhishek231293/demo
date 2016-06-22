@@ -22,8 +22,10 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/css/style.css">
-    
-    
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>
+    <script src="{{asset('javascript/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -103,6 +105,12 @@
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.js"></script>
+
+    <!--Image Gallery Plugins -->
+    <script src="{{asset('javascript/plugins.js')}}"></script>
+    <script src="{{asset('javascript/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{asset('javascript/main.js') }}"></script>
+
 
     <script src="{{ asset('javascript/form.js') }}"></script>
     <script src="{{ asset('javascript/graphs.js') }}"></script>
