@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class GalleryImage extends Migration
+class ImageCategorys extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class GalleryImage extends Migration
      */
     public function up()
     {
-        Schema::create('gallery_images', function (Blueprint $table) {
+        Schema::create('image_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image_name');
-            $table->integer('category_id');
+            $table->string('category_name');
             $table->integer('is_active')->default('1');
         });
     }

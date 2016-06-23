@@ -10,18 +10,22 @@
     <title>Admin | Task </title>
 @endif
 
-    <!-- Fonts -->
+<!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-   
-    
+
+    <!-- Sweet Alert Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.css">
+
     <!-- Styles -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/css/style.css">
-    
-    
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>
+    <script src="{{asset('javascript/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -49,7 +53,7 @@
 
                 <!-- Branding Image -->
                 <a class="brand" href="{{ url('/') }}">
-                    <img src="{{url('/images/4c360.png')}}" alt="Logo" height="70" width="130">
+                    <img src="{{url('/images/4c360.png')}}" alt="Logo" height="60" width="150">
                 </a>
             </div>
 
@@ -93,18 +97,19 @@
 
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
-    <!-- Sweet Alert -->
-    <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
-
-    <!-- Sweet Alert For IE support -->
-    <script src="bower_components/es6-promise/promise.min.js"></script>
-
     <!--canvas box-->
     <!-- HighCharts -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.js"></script>
+
+    <!--Image Gallery Plugins -->
+    <script src="{{asset('javascript/plugins.js')}}"></script>
+    <script src="{{asset('javascript/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{asset('javascript/main.js') }}"></script>
 
 
     <script src="{{ asset('javascript/form.js') }}"></script>

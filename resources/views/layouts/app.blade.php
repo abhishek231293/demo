@@ -53,7 +53,7 @@
 
                 <!-- Branding Image -->
                 <a class="brand" href="{{ url('/') }}">
-                    <img src="{{url('/images/4c360.png')}}" alt="Logo" height="70" width="130">
+                    <img src="{{url('/images/4c360.png')}}" alt="Logo" height="60" width="150">
                 </a>
             </div>
 

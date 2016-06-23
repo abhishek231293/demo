@@ -17,6 +17,8 @@
 }
 .thumbnail img {
   opacity: .75;
+  min-height: 200px;
+  max-height: 200px;
  }
 .thumbnail img:hover {
   opacity: 1;

@@ -72,3 +72,26 @@ var confirmPopupDialoge = function($this,$id){
         }
     })
 }
+var getGalleryData = function (){
+
+    var value = $('select#category option:selected').val();
+    var CSRF_TOKEN = $('input[name="_token"]').val();
+    $(document).ready()
+    {
+        $.ajax({
+            url: "gallery/image",
+            type: "post",
+            data: {_token: CSRF_TOKEN,image_id:value},
+            success: function(result){
+                $("#loader").show();
+                $('#gallery_div').hide();
+                setTimeout(function () {
+                   $("#gallery_div").html(result);
+                   $("#loader").hide();
+                   $('#gallery_div').show();
+                },2000);
+
+            }
+        });
+    }
+}
