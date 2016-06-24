@@ -135,7 +135,7 @@
                                         </thead>
 
                                         <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                        
+                                        @if(count($tasks))
                                             @foreach ($tasks as $task)
 
                                             <tr class="odd" id="{{$task->id}}">
@@ -255,6 +255,15 @@
                                             </td>
                                         </tr>
                                         @endforeach
+                                        @else
+                                            <tr>
+                                                <td rowspan="4" colspan="7">
+                                                        <label style="font-size: 20px; color: white; text-align: center; padding: 15px;" class="label-danger col-md-12">
+                                                            <b>No Member Found</b>
+                                                        </label>
+                                                </td>
+                                            </tr>
+                                        @endif
                                             <div style="margin-top:20px; margin-bottom: 30px;" class="pull-left box-header" data-original-title="">
                                                 <button type="button" class="btn btn-primary">
                                                     <b>Total Members</b>
