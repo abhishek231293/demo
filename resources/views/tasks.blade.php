@@ -103,7 +103,6 @@
                                             </div>
                                         </div>
 
-                                        
                                     </div>
                             </div>
                             <div class="row row2">
@@ -247,7 +246,6 @@
                                                                     Close
                                                                 </button>
                                                             </form>  
-                                                               
 
                                                            </div>
                                                        </div>

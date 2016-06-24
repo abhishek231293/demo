@@ -9,12 +9,12 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-3">
-                            <i class="fa fa-comments fa-5x">
+                            <i class="fa fa-film fa-5x">
                             </i>
                         </div>
                         <div class="col-sm-9 text-right">
-                            <div class="huge">5</div>
-                            <div>New Comments!</div>
+                            <div class="huge">{{$imageCount}}</div>
+                            <div>Total Image!</div>
                         </div>
                     </div>
                 </div>
@@ -76,12 +76,14 @@
             </div>
         </div>
     </div>
-
-    <div class="row col-md-12 row4">
-
-        <div id="bar_chart_container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
+    <div class="panel panel-default row3">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>Total Members & Images</b></h3>
+        </div>
+        <div id="bar_chart_container" class="panel-body">
+        </div>
     </div>
+
 </div>
 
 @endsection

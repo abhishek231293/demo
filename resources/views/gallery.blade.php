@@ -4,10 +4,10 @@
     <div class="container gallery row2">
             <div class="row">
                 <div id="taskListFilterDiv" class="col-md-10 form-group control-group">
-                    {{ csrf_field() }}
+
                     <form id="taskList" class="search-form form-inline">
 
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        {{ csrf_field() }}
                         <select onchange="getGalleryData();" class="form-control" id="category" name="category">
                             <option value=""> -- Select Category -- </option>
                             @foreach ($categories as $category)
@@ -18,14 +18,29 @@
                 </div>
 
                 <div class="pull-right" style="margin-left: -2%;">
-                    <label class="btn btn-success">
-                        <i class="fa fa-plus"></i>
-                        Add Image
-                        <form action="">
+                        <div>
+                            <button onclick="showImageUploader()" id="addButton"class="btn btn-success">
+                                <i class="fa fa-plus"></i>
+                                Add Image
+                            </button>
+                        </div>
+                    <div id="addImageForm">
+                        <div style="display: none; position: relative; top:-50px;" id="uploadimage">
+                            <form  class="form-inline"  action="gallery/add" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                    <select class=" form-inline form-control" id="select_category" name="select_category">
+                                        @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input class="form-control" type="file" name="my_image" id="file" class="inputfile" />
+                                    {{--<input class="form-control" id="file" type="file" name="my_image" id="file" required />--}}
+                                    <input type="submit" value="Upload" class="form-control btn-info submit" />
+                            </form>
+                        </div>
+                        <div id="message"></div>
+                    </div>
 
-                            <input type="file" style="display: none;">
-                        </form>
-                    </label>
                 </div>
             </div>
 
@@ -50,6 +65,104 @@
         $(document).ready(function(){
             getGalleryData();
             $("[rel^='lightbox']").prettyPhoto();
+        });
+
+        $(document).ready(function (e) {
+            $("#uploadimage").on('submit',(function(e) {
+                e.preventDefault();
+
+                var CSRF_TOKEN = $('input[name="_token"]').val();
+                var file = $('#file')[0].files[0];
+                var value = $('select#select_category option:selected').val();
+
+                var formData = new FormData();
+                formData.append('file',file);
+                formData.append('category',value);
+                console.log(file);
+//                console.log($(this));
+//                return;
+
+//                $.post('gallery/add',formData,function (data) {
+//                    console.log(data);
+//                    $("#message").html(data);
+////                    getGalleryData();
+//
+//                });
+//                    return false;
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-Token' : CSRF_TOKEN }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "gallery/add", // Url to which the request is send
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(data)   // A function to be called if request succeeds
+                    {
+                        if(data == 'success'){
+                            $('#addButton').show();
+                            $('#uploadimage').hide();
+                            $('#file').val('');
+                            getGalleryData();
+                        }else {
+                            swal({
+                                title: 'Something Went Wrong!',
+                                text: 'Try Again!',
+                                type: 'warning',
+                                timer: 3000
+                            });
+                        }
+                    }
+                });
+            }));
+
+// Function to preview image after validation
+            $(function() {
+                $("#file").change(function() {
+                    $("#message").empty(); // To remove the previous error message
+                    var file = this.files[0];
+                    var imagefile = file.type;
+                    var size = file.size;
+                    var match= ["image/jpeg","image/png","image/jpg"];
+                    if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+                    {
+                        swal({
+                            title: 'Invalid Image File!',
+                            text: 'Only jpeg, jpg and png Images type allowed',
+                            type: 'warning',
+                            timer: 3000
+                        });
+                        $("#file").val('');
+                        return false;
+                    }
+                    else
+                    {
+                        console.log(size);
+                        if(size > 2097152){
+                            swal({
+                                title: 'File Size too big!',
+                                text: 'Max 2Mb file Allowed',
+                                type: 'warning',
+                                timer: 3000
+                            });
+                            $("#file").val('');
+                            return false;
+                        }else {
+                            var reader = new FileReader();
+                            reader.onload = imageIsLoaded;
+                            reader.readAsDataURL(this.files[0]);
+                        }
+                    }
+                });
+            });
+            function imageIsLoaded(e) {
+                $("#file").css("color","green");
+                $('#image_preview').css("display", "block");
+                $('#previewing').attr('src', e.target.result);
+                $('#previewing').attr('width', '250px');
+                $('#previewing').attr('height', '230px');
+            };
         });
     </script>
 @endsection

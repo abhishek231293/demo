@@ -89,9 +89,14 @@ var getGalleryData = function (){
                    $("#gallery_div").html(result);
                    $("#loader").hide();
                    $('#gallery_div').show();
-                },2000);
+                },1000);
 
             }
         });
     }
+}
+
+var showImageUploader = function () {
+    $('#addButton').hide();
+    $('#uploadimage').show();
 }

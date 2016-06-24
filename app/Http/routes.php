@@ -21,6 +21,8 @@ Route::get('/', 'HomeController@index');
 Route::post('create', 'HomeController@create');
 Route::get('gallery','HomeController@galleryData');
 Route::post('gallery/image','HomeController@gallerySelectedData');
+Route::post('gallery/add','HomeController@galleryAddImage');
+
 
 Route::auth();
 

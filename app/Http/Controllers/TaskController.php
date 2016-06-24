@@ -27,21 +27,17 @@ class TaskController extends Controller
         $task = \App\Task::query();
         
         if($request->has('status') || ($request->has('role') || $request->has('member_name')) ){
-         if($request->has('status')){
-            $task->where('is_active', $request->status);  
-         }
-         if( $request->has('member_name')){
-             $task->where('name', 'like', '%'. $request->member_name.'%'); 
-         }
-           
-         if( $request->has('role')){
-             $task->where('role', $request->role); 
-         }           
-            
+             if($request->has('status')){
+                $task->where('is_active', $request->status);
+             }
+             if( $request->has('member_name')){
+                 $task->where('name', 'like', '%'. $request->member_name.'%');
+             }
+             if( $request->has('role')){
+                 $task->where('role', $request->role);
+             }
         }
-      
         $task = $task->orderby('created_at','DESC')->paginate(5);
-//        $task->appends([request()->all()])->links();
 
         $role = DB::table('tasks')->groupBy('role')->get();
         return view('tasks', ['tasks' => $task, 'roles' => $role]);

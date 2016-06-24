@@ -15,6 +15,7 @@ class GalleryImage extends Migration
         Schema::create('gallery_images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image_name');
+            $table->timestamps();
             $table->integer('category_id');
             $table->integer('is_active')->default('1');
         });
