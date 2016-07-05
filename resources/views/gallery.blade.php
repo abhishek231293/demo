@@ -6,33 +6,28 @@
                 <div id="taskListFilterDiv" class="col-md-10 form-group control-group">
 
                     <form id="taskList" class="search-form form-inline">
-
                         {{ csrf_field() }}
-                        <select onchange="getGalleryData();" class="form-control" id="category" name="category">
-                            <option value=""> -- Select Category -- </option>
-                            @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->category_name}}</option>
-                            @endforeach
-                        </select>
+                        <select onchange="getGalleryData();" class="form-control" id="category" name="category"></select>
                     </form>
                 </div>
 
-                <div class="pull-right" style="margin-left: -2%;">
+                <div class="pull-right" style="margin-top: -4%; margin-left: -2%;">
                         <div>
+                            <button onclick="showCategoryAdder()" id="addCatButton" class="btn btn-warning">
+                                <i class="fa fa-plus"></i>
+                                Add Category
+                            </button>
                             <button onclick="showImageUploader()" id="addButton"class="btn btn-success">
                                 <i class="fa fa-plus"></i>
                                 Add Image
                             </button>
+
                         </div>
                     <div id="addImageForm">
-                        <div style="display: none; position: relative; top:-50px;" id="uploadimage">
+                        <div style="display: none; position: relative; top:0px;" id="uploadimage">
                             <form  class="form-inline"  action="gallery/add" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                                    <select class=" form-inline form-control" id="select_category" name="select_category">
-                                        @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->category_name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <select class=" form-inline form-control" id="select_category" name="select_category"></select>
                                     <input class="form-control" type="file" name="my_image" id="file" class="inputfile" />
                                     {{--<input class="form-control" id="file" type="file" name="my_image" id="file" required />--}}
                                     <input type="submit" value="Upload" class="form-control btn-info submit" />
@@ -41,9 +36,21 @@
                         <div id="message"></div>
                     </div>
 
+                    <div id="addCategoryForm">
+                        <div style="display: none; position: relative; top:0px;" id="addCategory">
+                            <form class="form-inline" id="categoryForm">
+                                {{ csrf_field() }}
+                                <input class="form-control" type="text" name="add_category" id="add_category" placeholder="Enter Category Name." />
+                                {{--<input class="form-control" id="file" type="file" name="my_image" id="file" required />--}}
+                                <button type="button" onclick="addNewCategory(event)" id="addButton"class="btn btn-default">
+                                    Add
+                                </button>
+                            </form>
+                        </div>
+                        <div id="message"></div>
+                    </div>
                 </div>
             </div>
-
             <div id="image_gallery_div" class="row row2">
                 <div id="loader" style="display: none;" class="col-md-7 col-md-offset-5 span3">
                     <img style="width: 200px !important; height: 200px !important;" class="group1" src="images/loader.gif" title="Click to Zoom" />
@@ -64,10 +71,12 @@
 
         $(document).ready(function(){
             getGalleryData();
+            getFilerData();
             $("[rel^='lightbox']").prettyPhoto();
         });
 
         $(document).ready(function (e) {
+
             $("#uploadimage").on('submit',(function(e) {
                 e.preventDefault();
 
@@ -100,11 +109,19 @@
                     processData: false,
                     success: function(data)   // A function to be called if request succeeds
                     {
+                        console.log(data);
                         if(data == 'success'){
                             $('#addButton').show();
                             $('#uploadimage').hide();
                             $('#file').val('');
                             getGalleryData();
+                        }else if(data == 'no category'){
+                            swal({
+                                title: 'Please Add category First!',
+                                text: 'Category Missing!',
+                                type: 'warning',
+                                timer: 3000
+                            });
                         }else {
                             swal({
                                 title: 'Something Went Wrong!',

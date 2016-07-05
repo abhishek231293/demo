@@ -79,15 +79,17 @@
                         </li>
                     @endif
                 </ul>
-                @if (Auth::guest())
-                    @extends('layouts.navigator')
-                @endif
-    
             </div>
-            
+
         </div>
-    
+
     </nav>
+
+    @if (!Auth::guest())
+        @include('layouts.navigator')
+    @endif
+
+    @yield('content')
 
     <!-- JavaScripts -->
 
@@ -111,10 +113,11 @@
     <script src="{{asset('javascript/jquery.prettyPhoto.js') }}"></script>
     <script src="{{asset('javascript/main.js') }}"></script>
 
-
+    <script src="{{ asset('javascript/multiStepForm.js') }}"></script>
     <script src="{{ asset('javascript/form.js') }}"></script>
     <script src="{{ asset('javascript/graphs.js') }}"></script>
-    
+    @yield('script')
+
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

@@ -12,16 +12,17 @@
 </div>
 @endif
 
-@yield('content')
+@section("script")
 
-@yield('script');
-<script type="text/javascript">
+    <script type="text/javascript">
 
-$(document).ready(function() {
-    $(".nav li a").on("click", function(){
-        $(".nav").find(".active").removeClass("active");
-        $(this).parent().addClass("active");
-    });
-});
+        $(document).ready(function() {
+            $(".nav li a").on("click", function(){
+                $(".nav").find(".active").removeClass("active");
+                $(this).parent().addClass("active");
+            });
+        });
 
-</script>
+    </script>
+
+@endsection

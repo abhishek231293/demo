@@ -20,9 +20,10 @@ Route::get('/', function () {
 Route::get('/', 'HomeController@index');
 Route::post('create', 'HomeController@create');
 Route::get('gallery','HomeController@galleryData');
+Route::post('gallery/filterData','HomeController@filterData');
 Route::post('gallery/image','HomeController@gallerySelectedData');
 Route::post('gallery/add','HomeController@galleryAddImage');
-
+Route::post('gallery/categoryAdd','HomeController@galleryAddCategory');
 
 Route::auth();
 
@@ -31,3 +32,4 @@ Route::resource('task', 'TaskController');
 Route::get('profile/{id}', 'ProfileController@index');
 Route::get('profile/{id}/password', 'ProfileController@changePassword');
 Route::post('profile/{id}/reset', 'ProfileController@resetPassword');
+Route::post('profile/{id}/updateUser','ProfileController@updateUser');

@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-@if (Auth::guest())
-    <title>Admin | Login </title>
+    @if (Auth::guest())
+        <title>Admin | Login </title>
     @else
-    <title>Admin | Task </title>
-@endif
+        <title>Admin | Task </title>
+    @endif
 
 <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -39,83 +39,82 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-                <!-- Branding Image -->
-                <a class="brand" href="{{ url('/') }}">
-                    <img src="{{url('/images/4c360.png')}}" alt="Logo" height="60" width="150">
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url( '/profile/'.Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i>View profile</a></li>
-                                <li><a href="{{url( '/profile/'.Auth::user()->id.'/password')}}"><i class="fa fa-btn fa-lock"></i>Change Password</a></li>
-                                <li><a href="{{ url( '/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-               
-                
-            </div>
-            
+            <!-- Branding Image -->
+            <a class="brand" href="{{ url('/') }}">
+                <img src="{{url('/images/4c360.png')}}" alt="Logo" height="60" width="150">
+            </a>
         </div>
-    
-    </nav>
-    
-    @yield('content')
 
-    <!-- JavaScripts -->
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url( '/profile/'.Auth::user()->id)}}"><i class="fa fa-btn fa-user"></i>View profile</a></li>
+                            <li><a href="{{url( '/profile/'.Auth::user()->id.'/password')}}"><i class="fa fa-btn fa-lock"></i>Change Password</a></li>
+                            <li><a href="{{ url( '/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
 
 
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+@yield('content')
 
-    <!--canvas box-->
-    <!-- HighCharts -->
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+<!-- JavaScripts -->
 
-
-    <!-- Sweet Alert -->
-    <script src="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.js"></script>
-
-    <!--Image Gallery Plugins -->
-    <script src="{{asset('javascript/plugins.js')}}"></script>
-    <script src="{{asset('javascript/jquery.prettyPhoto.js') }}"></script>
-    <script src="{{asset('javascript/main.js') }}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 
-    <script src="{{ asset('javascript/form.js') }}"></script>
-    <script src="{{ asset('javascript/graphs.js') }}"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+<!--canvas box-->
+<!-- HighCharts -->
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+<!-- Sweet Alert -->
+<script src="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.js"></script>
+
+<!--Image Gallery Plugins -->
+<script src="{{asset('javascript/plugins.js')}}"></script>
+<script src="{{asset('javascript/jquery.prettyPhoto.js') }}"></script>
+<script src="{{asset('javascript/main.js') }}"></script>
+
+<script src="{{ asset('javascript/multiStepForm.js') }}"></script>
+<script src="{{ asset('javascript/form.js') }}"></script>
+<script src="{{ asset('javascript/graphs.js') }}"></script>
+@yield('script')
+
+{{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
-

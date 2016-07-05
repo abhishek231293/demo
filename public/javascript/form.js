@@ -89,7 +89,26 @@ var getGalleryData = function (){
                    $("#gallery_div").html(result);
                    $("#loader").hide();
                    $('#gallery_div').show();
+                   $('#addCatButton').show();
                 },1000);
+
+            }
+        });
+    }
+}
+
+var getFilerData = function(){
+
+    var CSRF_TOKEN = $('input[name="_token"]').val();
+    $(document).ready()
+    {
+        $.ajax({
+            url: "gallery/filterData",
+            type: "post",
+            data: {_token: CSRF_TOKEN},
+            success: function(result){
+                $('#category').html(result);
+                $("#select_category").html(result);
 
             }
         });
@@ -98,5 +117,93 @@ var getGalleryData = function (){
 
 var showImageUploader = function () {
     $('#addButton').hide();
+    $("#addCatButton").hide();
+    $("#addCategory").hide();
     $('#uploadimage').show();
+}
+
+var showCategoryAdder = function(){
+    $('#addButton').hide();
+    $("#addCatButton").hide();
+    $("#addCategory").show();
+    $('#uploadimage').hide();
+}
+
+ function addNewCategory (e) {
+    e.preventDefault();
+     var CSRF_TOKEN = $('input[name="_token"]').val();
+     var newCategory = $("#add_category").val();
+     if(newCategory) {
+         $(document).ready()
+         {
+             $.ajax({
+                 url: "gallery/categoryAdd",
+                 type: "post",
+                 data: {
+                     _token: CSRF_TOKEN,
+                     add_category: newCategory
+                 },
+                 success: function (result) {
+                     getFilerData();
+                     $('#addButton').show();
+                     $("#addCatButton").show();
+                     $("#addCategory").hide();
+                     $('#uploadimage').hide();
+                     $("#add_category").val('');
+                 }
+             });
+         }
+     }else{
+         swal(
+             'Invalid input',
+             'Please enter a category name.',
+             'error'
+         );
+     }
+    
+}
+
+function updateUserData($id,e){
+    e.preventDefault();
+    var CSRF_TOKEN = $('input[name="_token"]').val();
+
+    var values = {};
+    $.each($('#demo-modal').serializeArray(), function(i, field) {
+        values[field.name] = field.value;
+    });
+
+    $(document).ready()
+    {
+        $.ajax({
+            url: $id+"/updateUser",
+            type: "post",
+            data: {_token   : CSRF_TOKEN,
+                    id      :$id,
+                    data : values},
+            success: function(result){
+                if(result == 'success'){
+
+                    $("#closeButton").click();
+
+                    swal({
+                        title: '100% Completed',
+                        text: 'Information updated Sucessfully!.',
+                        type: 'success',
+                        timer: 50000
+                    });
+                    setTimeout(function () {
+                    window.location.reload();}
+                        ,3000);
+
+                }else{
+                    swal({
+                        title :'Oops...',
+                        text :'Something went wrong!',
+                        type : 'error',
+                        timer: 3000
+                    });
+                }
+            }
+        });
+    }
 }

@@ -59,6 +59,21 @@ class HomeController extends Controller
         return view('gallery',['categories'=>$categoryData]);
     }
 
+    public function filterData(){
+
+        $category = new \App\ImageCategory();
+        $categoryData = $category->where('is_active','=',1)->get();
+        $content = '';
+        $content .= '<option value="">-- Select Category --</option>';
+
+        foreach ($categoryData as $image) {
+            $category = $image->category_name;
+            $imageId = $image->id;
+            $content .= '<option value="'.$imageId.'">'.$category.'</option>';
+        }
+        echo $content;
+    }
+
     public function gallerySelectedData(Request $request){
 
         $image = \App\gallery_image::query();
@@ -94,6 +109,11 @@ class HomeController extends Controller
     public function galleryAddImage(Request $request)
     {
         $category = request()->category;
+
+        if($category == 'undefined'){
+            return "no category";
+        }
+
         $type = request()->file('file')->getMimeType();
         $file_extension = request()->file('file')->guessClientExtension();
         $file_size = request()->file('file')->getClientSize();
@@ -131,5 +151,14 @@ class HomeController extends Controller
 
 
         }
+    }
+
+    function galleryAddCategory(Request $request){
+        $category = $request->add_category;
+        $newCategory = new \App\ImageCategory();
+
+        $newCategory->category_name = $category;
+        $newCategory->save();
+        return 'Success';
     }
 }
