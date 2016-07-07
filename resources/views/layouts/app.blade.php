@@ -104,6 +104,8 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+    <!-- Google map Api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRIvlYibauhi3xiH8ByhDhQTUkIS5RXo"></script>
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/sweetalert2/4.0.4/sweetalert2.min.js"></script>
@@ -116,6 +118,7 @@
     <script src="{{ asset('javascript/multiStepForm.js') }}"></script>
     <script src="{{ asset('javascript/form.js') }}"></script>
     <script src="{{ asset('javascript/graphs.js') }}"></script>
+    <script src="{{ asset('javascript/map.js') }}"></script>
     @yield('script')
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

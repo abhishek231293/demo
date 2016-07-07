@@ -27,9 +27,14 @@ Route::post('gallery/categoryAdd','HomeController@galleryAddCategory');
 
 Route::auth();
 
+
 Route::resource('task', 'TaskController');
 
-Route::get('profile/{id}', 'ProfileController@index');
-Route::get('profile/{id}/password', 'ProfileController@changePassword');
+
+Route::get('profile/{id}', ['middleware' => 'profile', 'uses'=>'ProfileController@index']);
+
+Route::get('profile/{id}/password', ['middleware' => 'profile', 'uses'=>'ProfileController@changePassword']);
 Route::post('profile/{id}/reset', 'ProfileController@resetPassword');
 Route::post('profile/{id}/updateUser','ProfileController@updateUser');
+
+Route::get('map','MapController@index');

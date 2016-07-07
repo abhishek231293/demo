@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+
+class profileMiddleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if($request->route('id') != $request->user()->id){
+            return redirect(str_replace('{id}',$request->user()->id, $request->route()->uri()));
+        }
+        return $next($request);
+    }
+}

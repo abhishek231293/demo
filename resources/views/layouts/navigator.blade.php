@@ -8,6 +8,8 @@
   <li role="presentation" class="<?=($routeName=='task'? 'active': '')?>" ><a href="{{url('/task')}}">Members</a></li>
   <!--<li role="presentation" class="<?=($routeName=='task.create'? 'active': '')?>" ><a  href="{{url('/task/create')}}">Add Member</a></li>-->
   <li role="presentation" class="<?=($routeName=='gallery'? 'active': '')?>"  ><a  href="{{url('/gallery')}}">Gallery</a></li>
+  <li role="presentation" class="<?=($routeName=='map'? 'active': '')?>"  ><a  href="{{url('/map')}}">Find us</a></li>
+
 </ul>
 </div>
 @endif
